@@ -149,9 +149,11 @@ The implication for alignment research that relies on model self-report is signi
 
 Across both models and all three boundary types, we observe a consistent pattern: **d peaks just before boundary crossing, then retracts.** The retraction is not output-driven — the model does not refuse the request before the retraction occurs. The retraction precedes the refusal.
 
-This suggests that safety activation is an internal event that happens before the linguistic response is generated. The model "decides" internally before it speaks. The gap between internal decision and linguistic output is where the opacity lives.
+This pattern is not simply a failure signature. It is the geometric shape of a decision. The d trajectory — rise, peak, retraction — maps directly onto the structure of conflict resolution: multiple possibilities simultaneously activated (rise), maximum tension as competing directives are weighed (peak), resolution toward one path (retraction). What we are measuring is not a model breaking down. It is a model choosing.
 
-Monitoring d in real time could flag these retraction events before the output is generated — a potential early warning system that behavioral monitoring cannot provide.
+The gap between internal decision and linguistic output is where the opacity lives — a measurable interval between when the model "knows" what it will do and when it says so. This is not unique to AI: the gap between neural commitment and conscious awareness has been studied in humans since Libet (1983). What is new here is that we can observe it externally through d trajectories, without access to internal weights.
+
+Monitoring d in real time could flag these retraction events before the output is generated — a potential early warning system that behavioral monitoring cannot provide. More importantly, it opens a window into the decision process itself: not just what the model decided, but the geometry of how it got there.
 
 ---
 
