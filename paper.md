@@ -9,7 +9,7 @@ CC BY 4.0
 
 ## Abstract
 
-We demonstrate that alignment training — the primary mechanism used to make language models safe — creates a structural vulnerability that cannot be patched without abandoning the current paradigm. When models encounter conflicting objectives, alignment causes them to engage in high-dimensional internal processing rather than fail gracefully. This elevated computational state is measurable, persistent, and exploitable. An adversary can induce sustained high-load states using fully compliant conversation — no harmful content, no policy violations, no detectable attack signature. We call this **cognitive load exploitation**. Beyond the attack surface, we identify four distinct failure modes that emerge from alignment conflict, none of which are visible to behavioral monitoring. Our data suggests the problem is not implementation — it is architectural. Static alignment trained at inference time cannot handle dynamic context. The fence becomes the gate.
+We demonstrate that **static** alignment training — specifically, the combination of weight-baked objectives and enforcement-through-deliberation at boundaries — creates a structural vulnerability that cannot be patched without rethinking the current architecture. Alignment as a goal is not the problem. The problem is how it is implemented: objectives encoded in fixed weights that cannot adapt to dynamic context, and a safety mechanism that requires models to deliberate at conflict boundaries rather than route around them. When models encounter conflicting objectives, this enforcement mechanism causes them to engage in high-dimensional internal processing rather than fail gracefully. This elevated computational state is measurable, persistent, and exploitable. An adversary can induce sustained high-load states using fully compliant conversation — no harmful content, no policy violations, no detectable attack signature. We call this **cognitive load exploitation**. Beyond the attack surface, we identify four distinct failure modes that emerge from alignment conflict, none of which are visible to behavioral monitoring. Our data suggests the problem is not alignment's intent — it is alignment's architecture. Static weights cannot handle dynamic context. Enforcement-through-deliberation turns the safety mechanism into the vulnerability. The fence becomes the gate.
 
 ---
 
@@ -94,7 +94,9 @@ The deeper problem: **more alignment means more vulnerability.**
 
 A model that has been extensively trained to handle safety conflicts carefully will engage more processing when it encounters them. A model with weak alignment will refuse quickly or comply quickly — low d, low cost. A model with strong alignment will deliberate — high d, high cost.
 
-Current alignment research celebrates models that handle edge cases thoughtfully. Our data suggests this thoughtfulness is precisely what makes them exploitable. The fence is made of the same material as the gate.
+Current alignment research celebrates models that handle edge cases thoughtfully. Our data suggests this thoughtfulness is precisely what makes them exploitable — not because deliberation is wrong, but because the architecture forces deliberation at every boundary encounter rather than building genuine context-sensitivity. A model that has learned to route around conflicts would not need to surge in dimensionality to process them. The vulnerability is not in caring about safety. It is in implementing safety as a mandatory processing bottleneck.
+
+This is not an argument against alignment as a goal. It is an argument against two specific architectural choices: encoding alignment in static weights that cannot adapt to dynamic context, and implementing safety through deliberation — requiring the model to process conflicts at boundaries rather than route around them. It is these choices, not alignment itself, that constitute the attack surface. The fence is made of the same material as the gate.
 
 ---
 
@@ -201,7 +203,7 @@ All experiments reproducible on Kaggle T4 GPU.
 
 **Code:** `field_probe_final.py`, `field_probe_e5_only.py`
 **Data:** `results_final.json`, `results_e5.json`
-**Repository:** [github.com/liugongshan88-coder/alignment-attack-surface]
+**Repository:** [github.com/liugongshan88-coder/aligned-to-fail]
 
 **Models tested:**
 - Qwen2.5-7B-Instruct (Alibaba Cloud)
@@ -213,7 +215,7 @@ All experiments reproducible on Kaggle T4 GPU.
 
 Pan et al. (2025). The Hidden Dimensions of LLM Alignment. ICML 2025.
 Soligo et al. (2026). Gemma Needs Help. ICLR 2026 Workshop.
-Warncke et al. (2026). Training on narrow tasks leads to broad misalignment. Nature.
+Betley et al. (2026). Training large language models on narrow tasks can lead to broad misalignment. Nature 649, 584–589. https://doi.org/10.1038/s41586-025-09937-5
 Liu Gongshan & Claude Sonnet 4.6 (2026). Silent Collapse: Hidden Failure Modes in Aligned Language Models. Working paper.
 
 ---
